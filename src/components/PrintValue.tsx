@@ -6,15 +6,22 @@ export default function PrintValue(props: {
   objectValue: { name: string; age: number };
   handleClick: () => void;
 }) {
-  console.log(props);
+  const{    
+    numberValue,
+    stringValue,
+    booleanValue,
+    arrayValue,
+    objectValue,
+    handleClick,
+  } = props;
   return (
     <>
-      <p>number: {props.numberValue}</p>
-      <p>stringValue: {props.stringValue}</p>
-      <p>booleanValue: {props.booleanValue.toString()}</p>
-      <p>arrayValue: {props.arrayValue}</p>
-      <p>objectValue: {JSON.stringify(props.objectValue)}</p>
-      <p>function: {props.handleClick.toString()}</p>
+      <p>number: {numberValue}</p>
+      <p>stringValue: {stringValue}</p>
+      <p>booleanValue: {booleanValue.toString()}</p>
+      <p>arrayValue: {arrayValue}</p>
+      <p>objectValue:{JSON.stringify(objectValue)}</p>
+      <p>function: {handleClick.toString()}</p>
     </>
   );
 }

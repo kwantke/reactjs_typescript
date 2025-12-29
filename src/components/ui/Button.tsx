@@ -1,20 +1,14 @@
-export default function Button() {
-  const handleClick = (
+export default function Button({
+  handleClick,
+}: {
+  handleClick: (
     message: string,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    console.log(message);
-    console.log(event);
-  };
-  const handleClick2 = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    console.log(event);
-  };
+  ) => void;
+}) {
   return (
     <>
-      <button onClick={(event) => handleClick("click", event)}>클릭</button>
-      <button onClick={handleClick2}>클릭</button>
+      <button onClick={(e) => handleClick("Hello", e)}>클릭</button>
     </>
   );
 }

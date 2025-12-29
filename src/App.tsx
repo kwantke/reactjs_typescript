@@ -1,23 +1,18 @@
-import PrintValue from "./components/PrintValue";
+import User from "./components/User";
+import User2 from "./components/User2";
 
 export default function App() {
-  const numberValue = 42;
-  const stringValue = "Hello World";
-  const booleanValue = true;
-  const arrayValue = [1, 2, 3, 4];
-  const objectValue = { name: "John Doe", age: 30 };
-  const handleClick = () => alert("버튼이 클릭되었습니다!");
+  const userObj = {
+    name: "jack",
+    age: 20,
+    gender: "male",
+  };
 
   return (
     <>
-      <PrintValue
-        numberValue={numberValue}
-        stringValue={stringValue}
-        booleanValue={booleanValue}
-        arrayValue={arrayValue}
-        objectValue={objectValue}
-        handleClick={handleClick}
-      />
+      <User userObj={userObj} />
+      <User2 {...userObj} />
+      {/*<User2 name={"jack"} age={20} gender={"male"} />*/}
     </>
   );
 }

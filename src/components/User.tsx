@@ -1,10 +1,11 @@
-export default function User(props: { name: string; age: number }) {
+export default function User({userObj}: {
+  userObj: { name: string; age: number; gender: string };
+}) {
   return (
     <>
-      <div>
-        <p>name: {props.name}</p>
-        <p>age: {props.age}</p>
-      </div>
+      <p>name: {userObj.name}</p>
+      <p>age: {userObj.age}</p>
+      <p>gender: {userObj.gender}</p>
     </>
   );
 }

@@ -1,17 +1,21 @@
 import { useState } from "react";
 
 export default function App() {
-  const [state, setState] = useState<number | string>(0);
-  const [isShow, setIsShow] = useState<boolean>(true);
-  const handleSetToTen = () => {
-    setState("10");
-    setIsShow(false);
+  const [name, setName] = useState<string>("Jack");
+  const [age, setAge] = useState<number>(20);
+  const [gender, setGender] = useState<"male" | "female">("male");
+
+  const handleUpdateProfile = () => {
+    setName("Mike");
+    setAge(30);
+    setGender("female");
   };
   return (
     <>
-      <h1>state: {state}</h1>
-      <h1>isShow: {isShow.toString()}</h1>
-      <button onClick={handleSetToTen}>Set To 10</button>
+      <p>name: {name}</p>
+      <p>age: {age}</p>
+      <p>gender: {gender}</p>
+      <button onClick={handleUpdateProfile}>Update Profile</button>
     </>
   );
 }

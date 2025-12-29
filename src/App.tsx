@@ -1,17 +1,13 @@
-import { useState } from "react";
-import LoginStatus from "./components/login/LoginStatus";
-
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogIn = () => setIsLoggedIn(true);
-  const handleLogout = () => setIsLoggedIn(false);
+  const fruits = ["apple", "banana", "orange"];
   return (
     <>
-      <LoginStatus
-        isLoggedIn={isLoggedIn}
-        handleLogIn={handleLogIn}
-        handleLogout={handleLogout}
-      />
+      <p>Fruits Lists</p>
+      <ul>
+        {fruits.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul>
     </>
   );
 }

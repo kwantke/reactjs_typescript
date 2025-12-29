@@ -1,16 +1,15 @@
-import {type Dispatch, type SetStateAction } from "react";
 
 export default function FirstCount({
   count,
-  setCount,
+  handleIncrement,
 }: {
   count: number;
-  setCount: Dispatch<SetStateAction<number>>;
+  handleIncrement: () => void;
 }) {
   return (
     <>
       <h1>FirstCount Component: {count}</h1>
-      <button onClick={() => setCount((count) => count + 1)}>Increment</button>
+      <button onClick={handleIncrement}>Increment</button>
     </>
   );
 }

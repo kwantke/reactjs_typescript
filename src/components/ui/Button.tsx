@@ -1,14 +1,15 @@
 export default function Button({
+  handleClick,
   message,
   children,
 }: {
+  handleClick: (message: string) => void;
   message: string;
   children: React.ReactNode;
 }) {
-  const handleClick = () => alert(message);
   return (
     <>
-      <button onClick={handleClick}>{children}</button>
+      <button onClick={() => handleClick(message)}>{children}</button>
     </>
   );
 }

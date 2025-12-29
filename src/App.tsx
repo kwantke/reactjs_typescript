@@ -1,50 +1,19 @@
 import { useState } from "react";
 
 export default function App() {
-  const [userInfo, setUserInfo] = useState({
-    name: "jack",
-    age: 20,
-    gender: "male",
-    contact: {
-      email: "jack@example.com",
-      phone: "123-456-7890",
-    },
-    address: {
-      home: {
-        street: "123 Main St",
-        city: "New York",
-        zipCode: "10001",
-      },
-      office: {
-        street: "456 Business Ave",
-        city: "New York",
-        zipCode: "10002",
-      },
-    },
-  });
-
-  const handleUpdateUserInfo = () => {
-    setUserInfo((userInfo) => ({
-      ...userInfo,
-      name: "mike",
-      contact: {
-        ...userInfo.contact,
-        email: "sucoding@naver.com",
-      },
-      address: {
-        ...userInfo.address,
-        office: {
-          ...userInfo.address.office,
-          street: "123 Ave",
-        },
-      },
-    }));
+  const [fruits, setFruits] = useState(["apple", "banana", "orange"]);
+  const handleAddFruit = () => {
+    //setFruits((fruits) => ["melon", ...fruits]);
+    // setFruits((fruits) =>
+    //   fruits.map((fruit) => (fruit === "apple" ? "grape" : fruit))
+    // );
+    //...fruits.slice(0, 1) : 배열 fruits의 0번 인덱스부터 1개를 잘라서
+    setFruits((fruits) => [...fruits.slice(0, 1), "grape", ...fruits.slice(1)]);
   };
-
   return (
     <>
-      <pre>{JSON.stringify(userInfo, null, 2)}</pre>
-      <button onClick={handleUpdateUserInfo}>UpdateUserInfo</button>
+      <p>{fruits.join(", ")}</p>
+      <button onClick={handleAddFruit}>Add Fruit</button>
     </>
   );
 }

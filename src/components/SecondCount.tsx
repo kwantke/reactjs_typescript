@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 
-export default function SecondCount() {
-  console.log("SecondCount")
-  const [count, setCount] = useState(0);
+export default function SecondCount({
+  count,
+  setCount,
+}: {
+  count: number;
+  setCount: Dispatch<SetStateAction<number>>;
+}) {
+
   return (
     <>
       <h1>SecondCount Component: {count}</h1>

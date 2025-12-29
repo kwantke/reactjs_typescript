@@ -1,14 +1,14 @@
-import Table from "./components/Table";
+import { useState } from "react";
 
 export default function App() {
+  const [state, setState] = useState<number>(0);
+  const handleSetToTen = () => {
+    setState(10);
+  };
   return (
     <>
-      <a
-        href="https://ko.wikipedia.org/"
-        onClick={(event) => event.preventDefault()}
-      >
-        위키피디아
-      </a>
+      <h1>state: {state}</h1>
+      <button onClick={handleSetToTen}>Set To 10</button>
     </>
   );
 }

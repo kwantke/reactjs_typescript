@@ -1,13 +1,16 @@
 import { useState } from "react";
 
 export default function App() {
-  const [state, setState] = useState<number>(0);
+  const [state, setState] = useState<number | string>(0);
+  const [isShow, setIsShow] = useState<boolean>(true);
   const handleSetToTen = () => {
-    setState(10);
+    setState("10");
+    setIsShow(false);
   };
   return (
     <>
       <h1>state: {state}</h1>
+      <h1>isShow: {isShow.toString()}</h1>
       <button onClick={handleSetToTen}>Set To 10</button>
     </>
   );

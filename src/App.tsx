@@ -5,8 +5,7 @@ export default function App() {
     message: string,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    console.log(message);
-    console.log(event);
+    event.currentTarget.innerText = message;
   };
   return (
     <>

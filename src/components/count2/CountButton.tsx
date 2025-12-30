@@ -1,6 +1,9 @@
-
 import { useDispatch } from "react-redux";
-import { decrement, increment, reset } from "../../store/features/counter/counterSlice";
+import {
+  decrement,
+  increment,
+  reset,
+} from "../../store/features/counter/counterSlice";
 
 export default function CountButton() {
   const dispatch = useDispatch();
@@ -8,9 +11,8 @@ export default function CountButton() {
     <>
       <button onClick={() => dispatch(decrement())}>감소</button>
       <button onClick={() => dispatch(reset())}>리셋</button>
-      <button onClick={() => dispatch(increment())}>
-        증가
-      </button>
+      {/* <button onClick={() => dispatch(increment(5))}>증가</button> */}
+      <button onClick={() => dispatch(increment({5,3}))}>증가</button>
     </>
   );
 }

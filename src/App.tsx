@@ -8,7 +8,7 @@ export default function App() {
     <>
       <h1>count: {count}</h1>
       <button onClick={() => setCount((count) => count + 1)}>증가</button>
-      <ChildA />
+      <ChildA count={count} />
     </>
   );
 }

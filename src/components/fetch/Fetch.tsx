@@ -7,31 +7,29 @@ interface Posts {
 }
 export default function Fetch() {
   const [posts, setPosts] = useState<Posts[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   useEffect(() => {
     const controller = new AbortController();
-    //setIsLoading(true);
-    //setError("");
-    fetch("http://localhost:3000/posts", {
-      signal: controller.signal,
-    })
-      .then((resposne) => {
-        console.log(resposne);
-        if (!resposne.ok) throw new Error("네트워크 통신 오류");
-        return resposne.json();
-      })
-      .then((data) => {
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      setError("");
+      try {
+        const response = await fetch("http://localhost:3000/posts", {
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error("네트워크 통신 오류");
+        const data = await response.json();
         setPosts(data);
-      })
-      .catch((e) => {
+      } catch (e) {
         console.log("오류: " + e);
         if (e instanceof Error && e.name !== "AbortError") setError(e.message);
-        //setError(e instanceof Error ? e.message : "unknown error");
-      })
-      .finally(() => {
+      } finally {
         if (!controller.signal.aborted) setIsLoading(false);
-      });
+      }
+    };
+
+    fetchPosts();
     return () => controller.abort();
   }, []);
 

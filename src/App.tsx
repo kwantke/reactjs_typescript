@@ -1,4 +1,4 @@
-import React, { lazy,useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 // import ChildA from "./components/child/ChildA";
 // import ChildB from "./components/child/ChildB";
 // const ChildA = React.lazy(() => import("./components/child/ChildA"));
@@ -12,8 +12,12 @@ export default function App() {
       <button onClick={() => setIsShow((isShow) => !isShow)}>토글</button>
       {isShow && (
         <>
-          <ChildA />
-          <ChildB />
+          <Suspense fallback={<h1>ChildA Loading..</h1>}>
+            <ChildA />
+          </Suspense>
+          <Suspense fallback={<h1>ChildB Loading..</h1>}>
+            <ChildB />
+          </Suspense>
         </>
       )}
     </>

@@ -6,6 +6,21 @@ import { ErrorBoundary } from "react-error-boundary";
 const ChildA = lazy(() => import("./components/child/ChildA"));
 const ChildB = lazy(() => import("./components/child/ChildB"));
 
+function Fallback({
+  error,
+  resetErrorBoundary,
+}: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre style={{ color: "red" }}>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>retry</button>
+    </div>
+  );
+}
 export default function App() {
   const [isShow, setIsShow] = useState(false);
   return (
@@ -20,7 +35,7 @@ export default function App() {
               <ChildA />
             </Suspense>
           </ErrorBoundary>
-          <ErrorBoundary fallback={<p>ChildB went wrong</p>}>
+          <ErrorBoundary FallbackComponent={Fallback}>
             <Suspense fallback={<h1>ChildB Loading..</h1>}>
               <ChildB />
             </Suspense>

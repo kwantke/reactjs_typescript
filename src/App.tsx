@@ -1,11 +1,9 @@
-import Count from "./components/countZustand/Count";
-import CountOutside from "./components/countZustand/CountOutside";
+import Fetch from "./components/fetch/Fetch";
 
 export default function App() {
   return (
     <>
-      <Count />
-      <CountOutside />
+      <Fetch/>
     </>
   );
 }

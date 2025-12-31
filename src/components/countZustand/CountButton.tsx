@@ -9,7 +9,7 @@ export default function CountButton() {
     <>
       <button onClick={decrement}>감소</button>
       <button onClick={reset}>리셋</button>
-      <button onClick={increment}>증가</button>
+      <button onClick={()=> increment(5,10)}>증가</button>
     </>
   );
 }

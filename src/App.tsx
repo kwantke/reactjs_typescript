@@ -1,10 +1,10 @@
- import AxiosCrud from "./axios/AxiosCrud";
+import Axios from "./axios/Axios";
 
 export default function App() {
   return (
     <>
       {/* <Fetch /> */}
-      <AxiosCrud />
+      <Axios />
     </>
   );
 }

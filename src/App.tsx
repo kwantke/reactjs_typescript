@@ -1,9 +1,9 @@
-import PostPage from "./components/postBrowser/PostPage";
+import Movie from "./components/movies/Movie";
 
 export default function App() {
   return (
     <>
-      <PostPage />
+      <Movie />
     </>
   );
 }

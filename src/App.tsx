@@ -1,10 +1,9 @@
-import Axios from "./axios/Axios";
+import PostPage from "./components/postBrowser/PostPage";
 
 export default function App() {
   return (
     <>
-      {/* <Fetch /> */}
-      <Axios />
+      <PostPage />
     </>
   );
 }

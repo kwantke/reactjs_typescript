@@ -1,42 +1,18 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../api/axios";
+import { useAxiosGet } from "../hooks/useAxiosGet";
 interface Posts {
   id: number;
   title: string;
   views: number;
 }
 export default function Axios() {
-  const [posts, setPosts] = useState<Posts[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  useEffect(() => {
-    const controller = new AbortController();
-    const axiosPosts = async () => {
-      setIsLoading(true);
-      setError("");
-      try {
-        const { data } = await axiosInstance.get(
-          "/posts",
-          {
-            signal: controller.signal,
-          }
-        );
-        setPosts(data);
-      } catch (e) {
-        if (e instanceof Error) {
-          console.log(e.name);
-        }
-        if (e instanceof Error && e.name !== "CanceledError")
-          setError(e.message);
-      } finally {
-        if (!controller.signal.aborted) setIsLoading(false);
-      }
-    };
+  // const [posts, setPosts] = useState<Posts[]>([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState("");
 
-    axiosPosts();
-
-    return () => controller.abort();
-  }, []);
+  const { data: posts, isLoading, error } = useAxiosGet<Posts[]>("/posts");
+  useEffect(() => {}, []);
 
   if (error) return <p>Error: {error}</p>;
 

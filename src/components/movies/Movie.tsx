@@ -3,19 +3,32 @@ import MovieHeader from "./MovieHeader";
 import MovieList from "./MovieList";
 import MovieMain from "./MovieMain";
 import { axiosInstance } from "./api/axios";
-
+import { InView, useInView } from "react-intersection-observer";
 export default function Movie() {
   const [nowData, setNowData] = useState<MovieType[]>([]);
   const [nowLoading, setNowLoading] = useState(false);
   const [nowError, setNowError] = useState<Error | null>(null);
 
-  const [popData, setPopData] = useState<MovieType[]>([]);
-  const [popLoading, setPopLoading] = useState(false);
-  const [popError, setPopError] = useState<Error | null>(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  // const [popData, setPopData] = useState<MovieType[]>([]);
+  // const [popLoading, setPopLoading] = useState(false);
+  // const [popError, setPopError] = useState<Error | null>(null);
 
-  const [topData, setTopData] = useState<MovieType[]>([]);
-  const [topLoading, setTopLoading] = useState(false);
-  const [topError, setTopError] = useState<Error | null>(null);
+  // const [topData, setTopData] = useState<MovieType[]>([]);
+  // const [topLoading, setTopLoading] = useState(false);
+  // const [topError, setTopError] = useState<Error | null>(null);
+
+  const { ref } = useInView({
+    threshold: 0.5, // 얼마만큼 그 영역이 보여야 랜더링을 하겠는가
+    rootMargin: "200px", // 얼마만큼 여백을 남길것이냐
+    onChange: (inView: boolean) => {
+      //스크롤이 바닥에 닿으면 발생하는 이벤트
+      if (inView && !nowLoading && hasMore) {
+        setPage((page) => page + 1);
+      }
+    },
+  });
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,12 +49,15 @@ export default function Movie() {
       );
       try {
         const {
-          data: { results },
-        } = await axiosInstance.get(`/${endpoint}`, {
+          data: { results, total_pages },
+        } = await axiosInstance.get(`/${endpoint}?page=${page}`, {
           signal,
         });
+        setHasMore(page < total_pages);
+        if (page === 1) setData(results);
+        else setData((data) => [...data, ...results]);
         console.log(results);
-        setData(results);
+        //setData(results);
       } catch (e) {
         if (e instanceof Error && e.name !== "CanceledError") setError(e);
       } finally {
@@ -49,10 +65,10 @@ export default function Movie() {
       }
     };
     fetchCategory("now_playing", setNowData, setNowLoading, setNowError);
-    fetchCategory("popular", setPopData, setPopLoading, setPopError);
-    fetchCategory("top_rated", setTopData, setTopLoading, setTopError);
+    // fetchCategory("popular", setPopData, setPopLoading, setPopError);
+    // fetchCategory("top_rated", setTopData, setTopLoading, setTopError);
     return () => controller.abort();
-  }, []);
+  }, [page]);
   return (
     <>
       <MovieHeader />
@@ -63,7 +79,8 @@ export default function Movie() {
         loading={nowLoading}
         error={nowError}
       />
-      <MovieList
+      <div ref={ref}></div>
+      {/* <MovieList
         title="Popular"
         movies={popData}
         loading={popLoading}
@@ -74,7 +91,7 @@ export default function Movie() {
         movies={topData}
         loading={topLoading}
         error={topError}
-      />
+      /> */}
     </>
   );
 }

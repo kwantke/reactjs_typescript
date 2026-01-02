@@ -1,4 +1,4 @@
-import { star, thumbnail01 } from "./assets/assets";
+import { star } from "./assets/assets";
 
 export default function MovieListItem({
   title,
